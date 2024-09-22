@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+    <style>
+      body {
+        color: #000;
+        overflow-x: hidden;
+        height: 100%;
+        background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(249,249,249,1) 0%, rgba(65,116,157,1) 100%);
+      }
+
+      .card {
+        padding: 30px 40px;
+        margin-top: 30px;
+        margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .blue-text {
+        color: #00BCD4;
+      }
+
+      .form-control-label {
+        margin-bottom: 0;
+      }
+
+      input,
+      textarea,
+      button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300;
+      }
+
+      input:focus,
+      textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #00BCD4;
+        outline-width: 0;
+        font-weight: 400;
+      }
+
+      .btn-block {
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer;
+      }
+
+      .btn-block:hover {
+        color: #fff !important;
+      }
+
+      button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+          <h2>Add New Blog</h2>
+          <div class="card">
+            <form class="form-card" action="/blog" method="post" enctype="multipart/form-data">
+              <div class="row justify-content-between text-left">
+                <p class="blue-text">
+                  Share your thoughts and experiences by adding a new blog post.
+                </p>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label for="coverImage" class="form-control-label px-3">Cover Image</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="coverImage"
+                    name="coverImage"
+                    aria-describedby="coverImage"
+                  />
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-12 flex-column d-flex">
+                  <label for="title" class="form-control-label px-3">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    aria-describedby="title"
+                    placeholder="Enter the blog title"
+                    onblur="validate(1)"
+                  />
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex">
+                  <label for="body" class="form-control-label px-3">Body</label>
+                  <textarea
+                    name="body"
+                    class="form-control"
+                    id="body"
+                    placeholder="Write your blog content here"
+                    onblur="validate(2)"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                <div class="form-group col-sm-6">
+                  <button type="submit" class="btn-block btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+
+    <script>
+      function validate(val) {
+        const title = document.getElementById("title");
+        const body = document.getElementById("body");
+
+        let flag1 = true;
+        let flag2 = true;
+
+        if (val >= 1 || val === 0) {
+          if (title.value === "") {
+            title.style.borderColor = "red";
+            flag1 = false;
+          } else {
+            title.style.borderColor = "green";
+            flag1 = true;
+          }
+        }
+
+        if (val >= 2 || val === 0) {
+          if (body.value === "") {
+            body.style.borderColor = "red";
+            flag2 = false;
+          } else {
+            body.style.borderColor = "green";
+            flag2 = true;
+          }
+        }
+
+        return flag1 && flag2;
+      }
+    </script>
+  </body>
+</html>

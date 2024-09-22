@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Blog</title>
+    <style>
+      h2{
+        margin-top: 2%;
+      }
+      .btn{
+        padding: 1%;
+        font-size: 18px;
+        margin-top: 1rem;
+        color:aliceblue;
+        background-color: #124559;
+      }
+      .btn:hover {
+        background-color: #ffe169;
+      }
+      .container{
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <img src="<%= blog.createdBy.profileImageURL %>" width="50px" /> <%=
+      blog.createdBy.fullName %>
+    </div>
+
+    <div class="container mt-4">
+      <h2><%= blog.title %></h2>
+      <img src="<%= blog.coverImageURL %>" width="500px" />
+      <pre class="mt-3"><b><%= 
+        blog.createdBy.fullName %>: </b><%= blog.body %></pre>
+    </div>
+
+    <div class="container mt-3">
+      <h2>Comments (<%= comments.length %>)</h2>
+      <% if (locals.user) { %>
+      <form action="/blog/comment/<%= blog._id %>" method="post">
+        <div class="mb-3">
+          <input
+            type="text"
+            name="content"
+            class="form-control"
+            placeholder="Enter your comment"
+          />
+          <button class="btn btn-sm" type="submit">Add Comment</button>
+        </div>
+      </form>
+
+      <% } %>
+      <div class="mt-3">
+        <% comments.forEach(comment => { %>
+        <div>
+          <img src="<%= comment.createdBy.profileImageURL %>" width="50px" />
+          <%= comment.createdBy.fullName %>
+          <pre style="margin-left: 5%;"><%= comment.content %></pre>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>Signin</title>
+  <style>
+    body {
+      color: #000;
+      height: 100%;
+      background-image: url("https://ccfa297.s3.ap-south-1.amazonaws.com/im2.jpeg");
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    .card {
+      padding: 30px 40px;
+      margin-top: 30px;
+      margin-bottom: 60px;
+      border: none !important;
+      box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .blue-text {
+      font-size: 22px;
+      color: #00bcd4;
+    }
+
+    .form-control-label {
+      margin-bottom: 0;
+    }
+
+    input,
+    textarea,
+    button {
+      padding: 8px 15px;
+      border-radius: 5px !important;
+      margin: 5px 0px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      font-size: 18px !important;
+      font-weight: 300;
+    }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: none !important;
+      border: 1px solid #00bcd4;
+      outline-width: 0;
+      font-weight: 400;
+    }
+
+    .btn-block {
+      text-transform: uppercase;
+      font-size: 15px !important;
+      font-weight: 400;
+      /* height: 43px; */
+      cursor: pointer;
+    }
+
+    button:focus {
+      box-shadow: none !important;
+      outline-width: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('./partials/nav') %>
+
+  <div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+        <h1>Signin to your account</h1>
+        <div class="card">
+          <form class="form-card" action="/user/signin" method="post">
+            <p class="blue-text">
+              Enter your email and password to access your account.
+            </p>
+            <div class="form-group">
+              <label class="form-control-label px-3">Email address</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter your email"
+                onblur="validate(3)"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-control-label px-3">Password</label>
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Enter your password"
+                onblur="validate(4)"
+              />
+            </div>
+            <div class="row" style="display: flex; justify-content: center; align-items: center;">
+              <div class="form-group col-sm-6">
+                <button type="submit" class="btn-block">
+                  Sign in
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('./partials/scripts') %>
+
+  <script>
+    function validate(val) {
+      const email = document.getElementById("exampleInputEmail1");
+      const password = document.getElementById("exampleInputPassword1");
+
+      let flag1 = true;
+      let flag2 = true;
+
+      if (val >= 3 || val === 0) {
+        if (email.value === "") {
+          email.style.borderColor = "red";
+          flag1 = false;
+        } else {
+          email.style.borderColor = "green";
+          flag1 = true;
+        }
+      }
+
+      if (val >= 4 || val === 0) {
+        if (password.value === "") {
+          password.style.borderColor = "red";
+          flag2 = false;
+        } else {
+          password.style.borderColor = "green";
+          flag2 = true;
+        }
+      }
+
+      return flag1 && flag2;
+    }
+  </script>
+</body>
+</html>
